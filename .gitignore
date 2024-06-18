@@ -1,0 +1,17 @@
+# Editor directories and files
+.idea
+
+# Package Manager
+node_modules
+.temp
+.cache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+# Bundle
+dist
+play
+coverage
+# local env files
+*.local
