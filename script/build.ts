@@ -29,13 +29,6 @@ async function updatePackage() {
   await fs.writeJSON(UPDATE_PKG, packageJSON, { spaces: 2 });
   await fs.copy(UPDATE_PKG, join(DIR_ROOT, 'dist/package.json'));
 }
-async function updateDocs() {
-  await fs.copyFile(
-      join(DIR_ROOT, 'CHANGELOG.md'),
-      join(DIR_ROOT, 'docs/examples/version/CHANGELOG.md')
-  );
-  await fs.copyFile(join(DIR_ROOT, 'README.md'), join(DIR_ROOT, 'dist/README.md'));
-}
 async function gitPush() {
   /**
    * 如果由于无法提交推送，手动操作即可
@@ -60,9 +53,8 @@ async function gitPush() {
   });
 }
 async function run() {
-  await build();
+  await build('rc');
   await updatePackage();
-  await updateDocs();
   await gitPush();
 }
 

@@ -1,6 +1,6 @@
 {
-  "name": "co-axios",
-  "version": "0.0.1",
+  "name": "@eqian/axios-vue",
+  "version": "0.0.3-rc.0",
   "description": "工具库",
   "main": "./index.cjs",
   "module": "./index.mjs",
@@ -10,7 +10,8 @@
   "license": "MIT",
   "keywords": [
     "工具库",
-    "utils"
+    "axios",
+    "vue"
   ],
   "exports": {
     ".": {

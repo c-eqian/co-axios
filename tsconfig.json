@@ -26,9 +26,9 @@
     // 编译输出目标 ES 版本
     "target": "es2020",
     // 编译过程中需要引入的库文件的列表
-    "lib": ["DOM", "ESNext", "DOM.Iterable", "WebWorker"],
+    "lib": ["ESNext"],
     // 采用的模块系统
-    "module": "esnext",
+    "module": "NodeNext",
     // 如何处理模块
     "moduleResolution": "Node",
     // 无需要设定默认值

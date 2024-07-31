@@ -8,19 +8,20 @@ import esbuild from 'rollup-plugin-esbuild';
 import babel from '@rollup/plugin-babel'
 import { DEFAULT_EXTENSIONS } from '@babel/core'
 import  terser  from '@rollup/plugin-terser'
-
+import nodePolyfills from 'rollup-plugin-polyfill-node';
 // 读取 package.json 配置
 // import pkg from './package.json'
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const dir = path.resolve(__dirname, 'src/index.ts')
 // 当前运行环境，可通过 cross-env 命令行设置
 // const env = process.env.NODE_ENV
 // umd 模式的编译结果文件输出的全局变量名称
-const name = 'co-utils-vue';
+const name = 'axios-vue';
 const iifeGlobals = {
-  'vue-demi': 'VueDemi'
+  'vue-demi': 'VueDemi',
+  'axios': 'axios',
+  'co-utils-vue':`co-utils-vue`,
 }
 const config = {
   // 入口文件，src/utils.ts
@@ -34,6 +35,7 @@ const config = {
       // file: pkg.main,
       format: 'cjs',
       name,
+      exports: "named",
       globals: iifeGlobals
     },
     // es module
@@ -43,7 +45,6 @@ const config = {
       // file: pkg.module,
       format: 'es',
       globals: iifeGlobals,
-      name
     },
     // umd
     {
@@ -53,14 +54,18 @@ const config = {
       file: "./dist/index.umd.js",
       // file: pkg.umd,
       format: 'umd',
+      exports: "named",
       globals: iifeGlobals
     }
   ],
   plugins: [
+    nodePolyfills(),
+    // 解析第三方依赖
+    resolve({
+      browser: true
+    }),
     // 识别 commonjs 模式第三方依赖
     commonjs(),
-    // 解析第三方依赖
-    resolve(),
     // rollup 编译 typescript
     esbuild(),
     json(),
@@ -78,7 +83,9 @@ const config = {
     }),
   ],
   external: [
-      'vue-demi'
+      'vue-demi',
+      'co-utils-vue',
+      'axios'
   ]
 }
 // 若打包正式环境，压缩代码
