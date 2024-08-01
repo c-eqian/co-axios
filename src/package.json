@@ -13,6 +13,9 @@
     "axios",
     "vue"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "exports": {
     ".": {
       "import": "./index.mjs",

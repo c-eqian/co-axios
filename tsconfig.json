@@ -26,9 +26,9 @@
     // 编译输出目标 ES 版本
     "target": "es2020",
     // 编译过程中需要引入的库文件的列表
-    "lib": ["ESNext"],
+    "lib": ["DOM", "ESNext", "DOM.Iterable", "WebWorker"],
     // 采用的模块系统
-    "module": "NodeNext",
+    "module": "esnext",
     // 如何处理模块
     "moduleResolution": "Node",
     // 无需要设定默认值
@@ -55,9 +55,8 @@
     "listFiles": true,
     // 移除注释
     "removeComments": true,
-    "suppressImplicitAnyIndexErrors": true,
     // 是否允许编译javascript文件
-//    "allowJs": false,
+    //    "allowJs": false,
     // 是否允许跳过检查
     "skipLibCheck": true,
     "pretty": true,
@@ -65,13 +64,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": false,
     "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    // 解析非相对模块名的基准目录
-    "baseUrl": ".",
-    // 指定特殊模块的路径
-    "paths": {
-      "@/*": ["src/*"] // 这里 只建议使用 @/   使用其他的别名可能不会生效
-    }
-
- }
+    "allowUnusedLabels": false
+  }
 }

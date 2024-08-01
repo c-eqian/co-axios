@@ -28,6 +28,7 @@ async function updatePackage() {
   packageJSON.version = version;
   await fs.writeJSON(UPDATE_PKG, packageJSON, { spaces: 2 });
   await fs.copy(UPDATE_PKG, join(DIR_ROOT, 'dist/package.json'));
+  await fs.copyFile(join(DIR_ROOT, 'README.md'), join(DIR_ROOT, 'dist/README.md'));
 }
 async function gitPush() {
   /**

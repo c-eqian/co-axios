@@ -1,5 +1,5 @@
 import { IRequestConfig, IResponse } from '../types';
-import { isFunction } from 'co-utils-vue';
+import { isFunction } from '@eqian/utils-vue';
 import RequestHttp from '../interceptor';
 
 export const handleResponse = async (response: any, axiosInstance: RequestHttp): Promise<any> => {

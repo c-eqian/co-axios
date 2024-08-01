@@ -1,12 +1,12 @@
-import { isEmpty, isObjectLike } from 'co-utils-vue';
+import { isEmpty, isObjectLike } from '@eqian/utils-vue';
 
 /**
  * 参数处理
  * @param {*} params  参数
  */
 export function tansParams(params: { [x: string]: any }) {
-  if (isEmpty(params)) return params;
-  if (!isObjectLike(params)) return params;
+  if (isEmpty(params)) return '';
+  if (!isObjectLike(params)) return '';
   let result = '';
   // eslint-disable-next-line no-restricted-syntax
   for (const propName of Object.keys(params)) {

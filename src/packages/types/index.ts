@@ -50,7 +50,7 @@ export interface IRequestConfig extends AxiosRequestConfig {
    * 请求前
    * @param config
    */
-  preRequest?: (config: IRequestConfig) => MaybeRecord<IRequestConfig> | void;
+  preRequest?: (config: IRequestConfig) => IRequestConfig;
   /**
    * 请求后
    * @param response

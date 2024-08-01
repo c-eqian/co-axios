@@ -2,7 +2,6 @@
   // 继承 tsconfig.json 中的通用配置
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "NodeNext",
     "declaration": true,                   /* 生成相应的 '.d.ts' file. */
     "declarationDir": "./dist/types", /* 类型声明文件输出目录 */
     "emitDeclarationOnly": true, /* 只生成声明文件，不生成 js 文件*/

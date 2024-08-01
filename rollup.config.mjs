@@ -21,7 +21,7 @@ const name = 'axios-vue';
 const iifeGlobals = {
   'vue-demi': 'VueDemi',
   'axios': 'axios',
-  'co-utils-vue':`co-utils-vue`,
+  '@eqian/utils-vue':`co-utils-vue`,
 }
 const config = {
   // 入口文件，src/utils.ts
@@ -84,7 +84,7 @@ const config = {
   ],
   external: [
       'vue-demi',
-      'co-utils-vue',
+      '@eqian/utils-vue',
       'axios'
   ]
 }

@@ -1,7 +1,7 @@
 import axios, { type AxiosInstance } from 'axios';
 import { IRequestConfig, MethodReturn } from './types/index';
 import { baseConfig } from './axiosDefaultConfig';
-import { useMerge } from 'co-utils-vue';
+import { useMerge } from '@eqian/utils-vue';
 import { handleRequest } from './utils/handleRequest';
 import { handleRequestError, handleResponseError } from './utils/handleError';
 import { handleResponse } from './utils/handleResponse';
@@ -34,10 +34,10 @@ class RequestHttp {
     );
   }
   async request<T = any>(method: string, params: IRequestConfig): Promise<T> {
-    return await this.#service[method](
-      <string>params.url,
-      ['get', 'post'].includes(method) ? params.data : params
-    );
+    if (['put', 'post'].includes(method)) {
+      return await this.#service[method](<string>params.url, params.data, params);
+    }
+    return await this.#service[method](<string>params.url, params);
   }
   // 常用方法封装
   get<T>(params: IRequestConfig): MethodReturn<T> {
