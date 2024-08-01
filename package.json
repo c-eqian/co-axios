@@ -1,6 +1,6 @@
 {
   "name": "@eqian/axios-vue",
-  "version": "0.0.3-rc.0",
+  "version": "0.0.3",
   "description": "工具库",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
