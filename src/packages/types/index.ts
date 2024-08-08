@@ -69,6 +69,10 @@ export interface IRequestConfig extends AxiosRequestConfig {
  */
 export type OnSuccessCallback<T = any> = (callback: AxiosResponse<T>) => void;
 /**
+ * 完成回调方法类型
+ */
+export type OnCompletedCallback = () => void;
+/**
  * 失败回调方法类型
  */
 export type OnErrorCallback<T = any> = (callback: AxiosError<T>) => void;
@@ -89,15 +93,19 @@ export type MethodReturn<T = any, P = any> = {
    */
   loading: Ref<boolean>;
   /**
-   * 错误回调
-   * @param err
-   */
-  onError: (callback: OnErrorCallback) => void;
-  /**
    * 成功回调
    * @param data
    */
   onSuccess: (callback: OnSuccessCallback<T>) => void;
+  /**
+   * 执行完成，成功与否都会执行
+   */
+  onCompleted: (callback: OnCompletedCallback) => void;
+  /**
+   * 错误回调
+   * @param err
+   */
+  onError: (callback: OnErrorCallback) => void;
   /**
    * 请求方式
    * 支持传入参数

@@ -1,9 +1,10 @@
 import { getInstance } from '../hooks/useInstance';
-import {
-  type IRequestConfig,
+import type {
+  IRequestConfig,
   MethodReturn,
   OnErrorCallback,
   OnSuccessCallback,
+  OnCompletedCallback,
   Options
 } from '../types';
 import { Ref, ref } from 'vue-demi';
@@ -34,6 +35,9 @@ export const useBaseFetch = <T = any>(
   const onError = (callback: OnErrorCallback) => {
     cacheFn[`onError-${key}`] = callback;
   };
+  const onCompleted = (callback: OnCompletedCallback) => {
+    cacheFn[`onCompleted-${key}`] = callback;
+  };
   const request = async <P = any>(parameter?: P) => {
     loading.value = true;
     try {
@@ -49,6 +53,10 @@ export const useBaseFetch = <T = any>(
       }
     } finally {
       loading.value = false;
+      const completedFn = cacheFn[`onCompleted-${key}`];
+      if (completedFn && isFunction(completedFn)) {
+        completedFn.call(null);
+      }
     }
   };
   (async function () {
@@ -65,6 +73,7 @@ export const useBaseFetch = <T = any>(
     loading,
     onSuccess,
     onError,
+    onCompleted,
     request
   };
 };
