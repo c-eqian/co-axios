@@ -75,7 +75,7 @@ export type OnErrorCallback<T = any> = (callback: AxiosError<T>) => void;
 /**
  * 方法类型
  */
-export type MethodReturn<T = any> = {
+export type MethodReturn<T = any, P = any> = {
   /**
    * 终止请求函数
    */
@@ -99,19 +99,25 @@ export type MethodReturn<T = any> = {
    */
   onSuccess: (callback: OnSuccessCallback<T>) => void;
   /**
-   * 主动请求方式
+   * 请求方式
+   * 支持传入参数
+   * 如果是get、delete将会覆盖params, 如果是post、put将会覆盖data
+   * @param parameter
    */
-  request: () => void;
+  request: (parameter?: P) => Promise<void>;
 };
-export type RequestReturn<T = any> = {
+export type RequestReturn<T = any, P = any> = {
   /**
    * 终止请求函数
    */
   abort: () => void;
   /**
    * 请求方式
+   * 支持传入参数
+   * 如果是get、delete将会覆盖params, 如果是post、put将会覆盖data
+   * @param parameter
    */
-  request: () => Promise<T>;
+  request: (parameter?: P) => Promise<T>;
 };
 export type Options = {
   /**
@@ -119,4 +125,9 @@ export type Options = {
    * @default false
    */
   immediate?: boolean;
+  /**
+   * 方法实例KEY
+   * 如果不传，默认生成
+   */
+  key?: string;
 };

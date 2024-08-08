@@ -6,6 +6,7 @@ import { handleRequest } from './utils/handleRequest';
 import { handleRequestError, handleResponseError } from './utils/handleError';
 import { handleResponse } from './utils/handleResponse';
 import { AxiosCanceler } from './utils/AxiosCanceler';
+import { ref, Ref } from 'vue-demi';
 class RequestHttp {
   // 定义成员变量并指定类型
   #service: AxiosInstance;
@@ -40,31 +41,53 @@ class RequestHttp {
     return await this.#service[method](<string>params.url, params);
   }
   // 常用方法封装
-  get<T>(params: IRequestConfig): RequestReturn<T> {
+  get<T = any, P = any>(params: IRequestConfig): RequestReturn<T, P> {
+    const newParams: Ref<IRequestConfig> = ref(params);
     return {
-      abort: () => this.axiosCanceler.removePending(params),
-      request: () => this.request<T>('get', params)
+      abort: () => this.axiosCanceler.removePending(newParams.value),
+      request: (parameter?: P) => {
+        if (parameter) {
+          newParams.value.params = parameter;
+        }
+        return this.request<T>('get', newParams.value);
+      }
+    };
+  }
+  delete<T = any, P = any>(params: IRequestConfig): RequestReturn<T, P> {
+    const newParams: Ref<IRequestConfig> = ref(params);
+    return {
+      abort: () => this.axiosCanceler.removePending(newParams.value),
+      request: (parameter?: P) => {
+        if (parameter) {
+          newParams.value.params = parameter;
+        }
+        return this.request<T>('delete', newParams.value);
+      }
+    };
+  }
+  post<T = any, P = any>(params: IRequestConfig): RequestReturn<T, P> {
+    const newParams: Ref<IRequestConfig> = ref(params);
+    return {
+      abort: () => this.axiosCanceler.removePending(newParams.value),
+      request: (parameter?: P) => {
+        if (parameter) {
+          newParams.value.data = parameter;
+        }
+        return this.request<T>('post', newParams.value);
+      }
     };
   }
 
-  post<T>(params: IRequestConfig): RequestReturn<T> {
+  put<T = any, P = any>(params: IRequestConfig): RequestReturn<T, P> {
+    const newParams: Ref<IRequestConfig> = ref(params);
     return {
-      abort: () => this.axiosCanceler.removePending(params),
-      request: () => this.request<T>('post', params)
-    };
-  }
-
-  put<T>(params: IRequestConfig): RequestReturn<T> {
-    return {
-      abort: () => this.axiosCanceler.removePending(params),
-      request: () => this.request<T>('put', params)
-    };
-  }
-
-  delete<T>(params: IRequestConfig): RequestReturn<T> {
-    return {
-      abort: () => this.axiosCanceler.removePending(params),
-      request: () => this.request<T>('get', params)
+      abort: () => this.axiosCanceler.removePending(newParams.value),
+      request: (parameter?: P) => {
+        if (parameter) {
+          newParams.value.data = parameter;
+        }
+        return this.request<T>('put', newParams.value);
+      }
     };
   }
 }
