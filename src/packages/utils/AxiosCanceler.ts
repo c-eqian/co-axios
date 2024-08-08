@@ -1,7 +1,8 @@
 import { IRequestConfig } from '../types';
+import { unref } from 'vue-demi';
 
 const getPendingUrl = (config: IRequestConfig): string => {
-  return [config.method, config.url, config.params, config.data].join('&');
+  return [config.method, config.url, unref(config.params), unref(config.data)].join('&');
 };
 
 export class AxiosCanceler {

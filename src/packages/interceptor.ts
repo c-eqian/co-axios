@@ -6,7 +6,7 @@ import { handleRequest } from './utils/handleRequest';
 import { handleRequestError, handleResponseError } from './utils/handleError';
 import { handleResponse } from './utils/handleResponse';
 import { AxiosCanceler } from './utils/AxiosCanceler';
-import { ref, Ref } from 'vue-demi';
+import { ref, Ref, unref } from 'vue-demi';
 class RequestHttp {
   // 定义成员变量并指定类型
   #service: AxiosInstance;
@@ -36,8 +36,10 @@ class RequestHttp {
   }
   async request<T = any>(method: string, params: IRequestConfig): Promise<T> {
     if (['put', 'post'].includes(method)) {
-      return await this.#service[method](<string>params.url, params.data, params);
+      params.data = unref(params.data);
+      return await this.#service[method](<string>params.url, unref(params.data), params);
     }
+    params.params = unref(params.params);
     return await this.#service[method](<string>params.url, params);
   }
   // 常用方法封装

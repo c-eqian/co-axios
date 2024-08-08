@@ -9,7 +9,7 @@ export interface IResponse extends AxiosResponse {
 /**
  * 请求参数配置
  */
-export interface IRequestConfig extends AxiosRequestConfig {
+export interface IRequestConfig<T = any> extends Omit<AxiosRequestConfig, 'params' | 'data'> {
   /**
    * 是否携带时间戳,默认参数名：_t
    * 如果是字符串将作为参数名称
@@ -26,6 +26,14 @@ export interface IRequestConfig extends AxiosRequestConfig {
    * 请求头
    */
   header?: Record<string, any>;
+  /**
+   * 重写AxiosRequestConfig.data
+   */
+  data: T | Ref<T>;
+  /**
+   * 重写AxiosRequestConfig.params
+   */
+  params?: T | Ref<T>;
   /**
    * 响应字段配置
    */
@@ -77,6 +85,7 @@ export type OnCompletedCallback = () => void;
  */
 export type OnErrorCallback<T = any> = (callback: AxiosError<T>) => void;
 /**
+ * use[xxx],提供插件实例的方法
  * 方法类型
  */
 export type MethodReturn<T = any, P = any> = {
@@ -139,3 +148,11 @@ export type Options = {
    */
   key?: string;
 };
+
+/**
+ * 参数观察
+ */
+export type ParameterWatcher = {
+  watcher: string[];
+};
+export type UsePaginationOptions = ParameterWatcher & Options;
