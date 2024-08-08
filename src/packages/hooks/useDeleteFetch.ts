@@ -1,9 +1,6 @@
 import { useBaseFetch } from './useBaseFetch';
-import type { IRequestConfig, MethodReturn, Options } from '../types';
+import type { IRequestConfig, Options } from '../types';
 
-export const useDeleteFetch = <T = any>(
-  config: IRequestConfig,
-  options?: Options
-): MethodReturn<T> => {
-  return useBaseFetch('delete', config, options);
+export const useDeleteFetch = <T = any, P = any>(config: IRequestConfig, options?: Options) => {
+  return useBaseFetch<T, P>('delete', config, options);
 };

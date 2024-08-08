@@ -1,9 +1,6 @@
 import { useBaseFetch } from './useBaseFetch';
-import type { IRequestConfig, MethodReturn, Options } from '../types';
+import type { IRequestConfig, Options } from '../types';
 
-export const usePutFetch = <T = any>(
-  config: IRequestConfig,
-  options?: Options
-): MethodReturn<T> => {
-  return useBaseFetch('put', config, options);
+export const usePutFetch = <T = any, P = any>(config: IRequestConfig, options?: Options) => {
+  return useBaseFetch<T, P>('put', config, options);
 };

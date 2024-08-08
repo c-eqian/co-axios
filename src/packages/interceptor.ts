@@ -1,5 +1,5 @@
 import axios, { type AxiosInstance } from 'axios';
-import { IRequestConfig, RequestReturn } from './types/index';
+import type { IRequestConfig, RequestReturn } from './types/index';
 import { baseConfig } from './axiosDefaultConfig';
 import { useMerge } from '@eqian/utils-vue';
 import { handleRequest } from './utils/handleRequest';

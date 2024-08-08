@@ -17,11 +17,11 @@ import { generateUid } from '../utils/uid';
  * @param config 请求配置
  * @param options 其他额外配置
  */
-export const useBaseFetch = <T = any>(
+export const useBaseFetch = <T = any, P = any>(
   method: 'get' | 'post' | 'put' | 'patch' | 'delete',
   config: IRequestConfig,
   options?: Options
-): MethodReturn<T> => {
+): MethodReturn<T, P> => {
   const instance = getInstance();
   const data = ref<T>() as Ref<T>;
   const loading = ref<boolean>(false) as Ref<boolean>;
@@ -38,7 +38,7 @@ export const useBaseFetch = <T = any>(
   const onCompleted = (callback: OnCompletedCallback) => {
     cacheFn[`onCompleted-${key}`] = callback;
   };
-  const request = async <P = any>(parameter?: P) => {
+  const request = async (parameter?: P) => {
     loading.value = true;
     try {
       data.value = await send(parameter);
