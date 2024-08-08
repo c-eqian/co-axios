@@ -21,16 +21,16 @@ export default {
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: [
-    "src/packages/**/*.{js,jsx,ts,tsx}",
-    "!src/packages/hooks/useNamespace/**/*.ts",
-    "!src/packages/hooks/useSFCWithInstall/**/*.ts",
-    "!src/packages/hooks/useFormValueWatcher/**/*.ts",
-    "!src/packages/hooks/use-full-screen/**/*.ts",
-    "!src/packages/hooks/useDebounceRef/**/*.ts",
-    "!src/packages/hooks/useDebounceRef/**/*.ts",
-    "!src/packages/helper/**/*.ts",
-    "!src/packages/effects/**/*.ts",
-    "!src/packages/hooks/useWebSocket/*.ts",
+    'src/packages/**/*.{js,jsx,ts,tsx}',
+    '!src/packages/hooks/useNamespace/**/*.ts',
+    '!src/packages/hooks/useSFCWithInstall/**/*.ts',
+    '!src/packages/hooks/useFormValueWatcher/**/*.ts',
+    '!src/packages/hooks/use-full-screen/**/*.ts',
+    '!src/packages/hooks/useDebounceRef/**/*.ts',
+    '!src/packages/hooks/useDebounceRef/**/*.ts',
+    '!src/packages/helper/**/*.ts',
+    '!src/packages/effects/**/*.ts',
+    '!src/packages/hooks/useWebSocket/*.ts'
   ],
 
   // The directory where Jest should output its coverage files
@@ -99,8 +99,8 @@ export default {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  "moduleNameMapper": {
-    "^@/(.*)$": "<rootDir>/src/$1"
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1'
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -162,8 +162,8 @@ export default {
   // Options that will be passed to the testEnvironment
   testEnvironmentOptions: {
     userAgent:
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
-  },
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
+  }
 
   // Adds a location field to test results
   // testLocationInResults: false,

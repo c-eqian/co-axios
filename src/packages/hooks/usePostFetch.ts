@@ -1,8 +1,9 @@
-import { getInstance } from '../hooks/useInstance';
-import { type IRequestConfig, MethodReturn } from '../types';
+import { useBaseFetch } from './useBaseFetch';
+import type { IRequestConfig, MethodReturn, Options } from '../types';
 
-export const UsePostFetch = <T = any>(config: IRequestConfig): MethodReturn<T> => {
-  const instance = getInstance();
-  const { $http } = instance;
-  return $http.post<T>(config);
+export const usePostFetch = <T = any>(
+  config: IRequestConfig,
+  options?: Options
+): MethodReturn<T> => {
+  return useBaseFetch('post', config, options);
 };

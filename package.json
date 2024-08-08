@@ -94,7 +94,9 @@
     "yarn": "^1.22.19"
   },
   "files": [
-    "dist"
+    "dist",
+    "package.json",
+    "README.md"
   ],
   "lint-staged": {
     "src/**/*.{ts,js,vue,tsx}": [

@@ -1,5 +1,5 @@
 import axios, { type AxiosInstance } from 'axios';
-import { IRequestConfig, MethodReturn } from './types/index';
+import { IRequestConfig, RequestReturn } from './types/index';
 import { baseConfig } from './axiosDefaultConfig';
 import { useMerge } from '@eqian/utils-vue';
 import { handleRequest } from './utils/handleRequest';
@@ -40,28 +40,28 @@ class RequestHttp {
     return await this.#service[method](<string>params.url, params);
   }
   // 常用方法封装
-  get<T>(params: IRequestConfig): MethodReturn<T> {
+  get<T>(params: IRequestConfig): RequestReturn<T> {
     return {
       abort: () => this.axiosCanceler.removePending(params),
       request: () => this.request<T>('get', params)
     };
   }
 
-  post<T>(params: IRequestConfig): MethodReturn<T> {
+  post<T>(params: IRequestConfig): RequestReturn<T> {
     return {
       abort: () => this.axiosCanceler.removePending(params),
       request: () => this.request<T>('post', params)
     };
   }
 
-  put<T>(params: IRequestConfig): MethodReturn<T> {
+  put<T>(params: IRequestConfig): RequestReturn<T> {
     return {
       abort: () => this.axiosCanceler.removePending(params),
       request: () => this.request<T>('put', params)
     };
   }
 
-  delete<T>(params: IRequestConfig): MethodReturn<T> {
+  delete<T>(params: IRequestConfig): RequestReturn<T> {
     return {
       abort: () => this.axiosCanceler.removePending(params),
       request: () => this.request<T>('get', params)

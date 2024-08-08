@@ -1,4 +1,5 @@
 import { AxiosError, type AxiosRequestConfig, type AxiosResponse } from 'axios';
+import { Ref } from 'vue-demi';
 export type MaybeRecord<T> = T & Record<string, unknown>;
 // 请求响应参数，包含data
 export interface IResponse extends AxiosResponse {
@@ -63,7 +64,59 @@ export interface IRequestConfig extends AxiosRequestConfig {
   errorHandler?: (err: AxiosError) => void;
 }
 
+/**
+ * 成功回调方法类型
+ */
+export type OnSuccessCallback<T = any> = (callback: AxiosResponse<T>) => void;
+/**
+ * 失败回调方法类型
+ */
+export type OnErrorCallback<T = any> = (callback: AxiosError<T>) => void;
+/**
+ * 方法类型
+ */
 export type MethodReturn<T = any> = {
+  /**
+   * 终止请求函数
+   */
   abort: () => void;
+  /**
+   * 返回数据
+   */
+  data: Ref<T>;
+  /**
+   * 请求状态
+   */
+  loading: Ref<boolean>;
+  /**
+   * 错误回调
+   * @param err
+   */
+  onError: (callback: OnErrorCallback) => void;
+  /**
+   * 成功回调
+   * @param data
+   */
+  onSuccess: (callback: OnSuccessCallback<T>) => void;
+  /**
+   * 主动请求方式
+   */
+  request: () => void;
+};
+export type RequestReturn<T = any> = {
+  /**
+   * 终止请求函数
+   */
+  abort: () => void;
+  /**
+   * 请求方式
+   */
   request: () => Promise<T>;
+};
+export type Options = {
+  /**
+   * 是否立即执行
+   * @default false
+   */
+  immediate?: boolean;
 };

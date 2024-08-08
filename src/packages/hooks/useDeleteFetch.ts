@@ -1,8 +1,9 @@
-import { getInstance } from '../hooks/useInstance';
-import { type IRequestConfig, MethodReturn } from '../types';
+import { useBaseFetch } from './useBaseFetch';
+import type { IRequestConfig, MethodReturn, Options } from '../types';
 
-export const useDeleteFetch = <T = any>(config: IRequestConfig): MethodReturn<T> => {
-  const instance = getInstance();
-  const { $http } = instance;
-  return $http.delete<T>(config);
+export const useDeleteFetch = <T = any>(
+  config: IRequestConfig,
+  options?: Options
+): MethodReturn<T> => {
+  return useBaseFetch('delete', config, options);
 };
