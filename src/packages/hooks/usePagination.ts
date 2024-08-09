@@ -32,6 +32,8 @@ export const usePagination = <T = any, P extends object = any>(
     pageSizeKey = 'pageSize',
     totalKey = 'total',
     listKey = 'list',
+    append,
+    hasPage,
     responseHandler
   } = options ?? ({} as UsePaginationOptions<P>);
   const {
@@ -55,6 +57,8 @@ export const usePagination = <T = any, P extends object = any>(
     response: {
       totalKey,
       listKey,
+      append,
+      hasPage,
       responseHandler
     }
   });
