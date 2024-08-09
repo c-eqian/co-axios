@@ -1,6 +1,6 @@
 {
   "name": "@eqian/axios-vue",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "工具库",
   "main": "./index.cjs",
   "module": "./index.mjs",
@@ -23,6 +23,9 @@
       "types": "./types/index.d.ts"
     },
     "./*": "./*"
+  },
+  "peerDependencies": {
+    "@eqian/utils-vue": "^3.0.0"
   },
   "dependencies": {
     "vue-demi": "^0.14.6"
