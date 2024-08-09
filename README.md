@@ -145,6 +145,59 @@ const http = installHttp({
 | `handleSizeChange`    | `function` | 页数改变                                  |
 | `handleCurrentChange` | `function` | 页码改变                                  |
 
+## 通过 `CDN` 使用
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta lang="zh" charset="UTF-8">
+  <title>Title</title>
+</head>
+<div id="app">{{data.data.total}}</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.4.37/dist/vue.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-demi@0.14.10/lib/index.iife.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@1.7.3/dist/axios.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@eqian/utils-vue@3.0.0/index.umd.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@eqian/axios-vue@1.0.0/index.umd.js"></script>
+<script>
+    /**
+     * 使用自定义请求
+     */
+    const http = window['axios-vue']['installHttp']({
+        baseURL: 'http://xxxxxx',
+    })
+    const { request } = http.get({
+        url: '/article/list',
+    })
+    console.log(request().then(function (res){
+        console.log(res)
+    }))
+
+    /**
+     * 结合vue插件实例使用
+     */
+    const { createApp, watchEffect } = Vue
+    const { useGetFetch } = window['axios-vue']
+    createApp({
+        setup(){
+            const { data, request:_request } = useGetFetch({
+                url: '/article/list',
+            })
+            _request()
+            watchEffect(()=>{
+                console.log(data.value);
+            })
+            return {data}
+        }
+    }).use(window['axios-vue'].default, {
+        baseURL: 'http://xxxxxx',
+    }).mount('#app')
+</script>
+</html>
+
+```
+
 
 
 ## 配置
