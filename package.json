@@ -1,6 +1,6 @@
 {
   "name": "@eqian/axios-vue",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "工具库",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -21,6 +21,7 @@
     "post:version": "git push --tags",
     "test:coverage": "jest --coverage",
     "release": "npm run build&&standard-version",
+    "release-static": "npm run build && standard-version --release-as 1.0.0",
     "release:alpha": "npm run build&&standard-version --prerelease alpha",
     "release:rc": "standard-version --prerelease rc",
     "release:major": "npm run release -- --release-as major",
