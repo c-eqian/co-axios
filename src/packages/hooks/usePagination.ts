@@ -1,5 +1,5 @@
 import type { IRequestConfig, UsePaginationOptions } from '../types';
-import { useTableList } from '@eqian/utils-vue';
+import { useTableList } from './useTableList';
 import { getInstance } from './useInstance';
 import { unref } from 'vue-demi';
 const getRequestBody = (config: IRequestConfig) => {
@@ -26,7 +26,7 @@ export const usePagination = <T = any, P extends object = any>(
   const { $http } = instance;
   const { abort, request: send } = $http[method]<T>(config);
   const {
-    watcher = [],
+    watcher,
     handleParams,
     pageNumKey = 'pageNum',
     pageSizeKey = 'pageSize',

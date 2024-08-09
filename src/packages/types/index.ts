@@ -153,7 +153,19 @@ export type Options = {
  * 参数观察
  */
 export type ParameterWatcher<P = any, D = any> = {
-  watcher?: (keyof P)[];
+  watcher?: {
+    keys?: (keyof P)[];
+    /**
+     * watch 是否立即执行属性
+     * @default false
+     */
+    immediate?: boolean;
+    /**
+     * watch 深度监听属性
+     * @default false
+     */
+    deep?: boolean;
+  };
   /**
    * 请求前参数处理
    * @param params
