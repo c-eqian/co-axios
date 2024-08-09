@@ -5,5 +5,5 @@ export { useGetFetch } from './hooks/useGetFetch';
 export { useDeleteFetch } from './hooks/useDeleteFetch';
 export { usePostFetch } from './hooks/usePostFetch';
 export { usePutFetch } from './hooks/usePutFetch';
-
+export { usePagination } from './hooks/usePagination';
 export const installHttp = (options?: IRequestConfig) => new RequestHttp(options);

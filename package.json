@@ -113,7 +113,7 @@
     }
   },
   "dependencies": {
-    "@eqian/utils-vue": "^2.5.2",
+    "@eqian/utils-vue": "^3.0.0",
     "axios": "^1.7.2",
     "vue-demi": "^0.14.6"
   }

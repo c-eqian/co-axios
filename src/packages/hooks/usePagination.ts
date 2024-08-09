@@ -1,32 +1,72 @@
 import type { IRequestConfig, UsePaginationOptions } from '../types';
-import { watch } from 'vue-demi';
+import { useTableList } from '@eqian/utils-vue';
+import { getInstance } from './useInstance';
+import { unref } from 'vue-demi';
 const getRequestBody = (config: IRequestConfig) => {
   const { method = 'get' } = config;
   if (method.toLowerCase() === 'get') {
-    return config.params;
+    return [unref(config.params), method];
   }
   if (method.toLowerCase() === 'post') {
-    return config.data;
+    return [unref(config.data), method];
   }
-  return undefined;
+  return [{}, method];
 };
 /**
  * 分页请求
  * @param config
  * @param options
  */
-export const usePagination = (config: IRequestConfig, options?: UsePaginationOptions) => {
-  const requestBody = getRequestBody(config);
-  const { watcher = [] } = options ?? ({} as UsePaginationOptions);
-  if (requestBody) {
-    watch(
-      () => (watcher.length > 0 ? watcher.map(key => requestBody[key]) : requestBody),
-      () => {
-        console.log(requestBody);
-      },
-      {
-        deep: true
-      }
-    );
-  }
+export const usePagination = <T = any, P extends object = any>(
+  config: IRequestConfig<P>,
+  options?: UsePaginationOptions<P>
+) => {
+  const [requestBody, method] = getRequestBody(config);
+  const instance = getInstance();
+  const { $http } = instance;
+  const { abort, request: send } = $http[method]<T>(config);
+  const {
+    watcher = [],
+    handleParams,
+    pageNumKey = 'pageNum',
+    pageSizeKey = 'pageSize',
+    totalKey = 'total',
+    listKey = 'list',
+    responseHandler
+  } = options ?? ({} as UsePaginationOptions<P>);
+  const {
+    params,
+    tableLoading,
+    tableData,
+    tableTotal,
+    handleSearch,
+    handleCurrentChange,
+    handleSizeChange,
+    handleReset
+  } = useTableList<T, P>({
+    request: {
+      api: send,
+      pageSizeKey,
+      params: requestBody,
+      pageNumKey,
+      handleParams,
+      watcher
+    },
+    response: {
+      totalKey,
+      listKey,
+      responseHandler
+    }
+  });
+  return {
+    params,
+    tableLoading,
+    tableData,
+    tableTotal,
+    abort,
+    handleCurrentChange,
+    handleSizeChange,
+    handleSearch,
+    handleReset
+  };
 };

@@ -14,22 +14,12 @@ export default {
 
   // Automatically clear mock calls, instances, contexts and results before every test
   clearMocks: true,
-
   // Indicates whether the coverage information should be collected while executing the test
   // collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: [
     'src/packages/**/*.{js,jsx,ts,tsx}',
-    '!src/packages/hooks/useNamespace/**/*.ts',
-    '!src/packages/hooks/useSFCWithInstall/**/*.ts',
-    '!src/packages/hooks/useFormValueWatcher/**/*.ts',
-    '!src/packages/hooks/use-full-screen/**/*.ts',
-    '!src/packages/hooks/useDebounceRef/**/*.ts',
-    '!src/packages/hooks/useDebounceRef/**/*.ts',
-    '!src/packages/helper/**/*.ts',
-    '!src/packages/effects/**/*.ts',
-    '!src/packages/hooks/useWebSocket/*.ts'
   ],
 
   // The directory where Jest should output its coverage files

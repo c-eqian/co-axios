@@ -29,7 +29,7 @@ export interface IRequestConfig<T = any> extends Omit<AxiosRequestConfig, 'param
   /**
    * 重写AxiosRequestConfig.data
    */
-  data: T | Ref<T>;
+  data?: T | Ref<T>;
   /**
    * 重写AxiosRequestConfig.params
    */
@@ -152,7 +152,44 @@ export type Options = {
 /**
  * 参数观察
  */
-export type ParameterWatcher = {
-  watcher: string[];
+export type ParameterWatcher<P = any, D = any> = {
+  watcher?: (keyof P)[];
+  /**
+   * 请求前参数处理
+   * @param params
+   */
+  handleParams?: (params: P) => P;
+  /**
+   * 分页键
+   * @default pageNum
+   */
+  pageNumKey?: string;
+  /**
+   * 分页键
+   * @default pageSize
+   */
+  pageSizeKey?: string;
+  /**
+   * 返回结果的数据列表键
+   * @default list
+   * @example
+   * ```ts
+   * // 响应数据为 { data: { list: [] } } 则传递 data.list;
+   * ````
+   */
+  listKey?: string;
+  /**
+   * 返回结果的数据列表键
+   * @default total
+   * ```ts
+   * // 响应数据为 { data: { list: [], total: 0 } } 则传递 data.total;
+   * ```
+   */
+  totalKey?: string;
+  /**
+   * 自定义响应时处理，返回值必须包含listKey，totalKey，如果为空，应返回对应的默认值，即list、total
+   * @param res
+   */
+  responseHandler?: (res: D) => any;
 };
-export type UsePaginationOptions = ParameterWatcher & Options;
+export type UsePaginationOptions<P = any, D = any> = ParameterWatcher<P, D> & Options;

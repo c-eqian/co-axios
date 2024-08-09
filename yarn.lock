@@ -1135,10 +1135,10 @@
     "@docsearch/css" "3.3.0"
     algoliasearch "^4.0.0"
 
-"@eqian/utils-vue@^2.5.2":
-  version "2.5.2"
-  resolved "https://registry.npmjs.org/@eqian/utils-vue/-/utils-vue-2.5.2.tgz"
-  integrity sha512-0ckXpFIDuaH77+F0kAxdBkJIhocNLLCUz0IUIjplXJtZitK/afLbR1l5WQESlOJuk3ln54a9ccSAGS3DXoY8EQ==
+"@eqian/utils-vue@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@eqian/utils-vue/-/utils-vue-3.0.0.tgz"
+  integrity sha512-QijicN7TOg12cn1B6lq20VAcNX+Ba5uD/AX43B4HjsuBGHIsQY+8bcsvSlshlh9UuC+JT+s8cWG31QouQPSBTw==
   dependencies:
     vue-demi "^0.14.6"
 
