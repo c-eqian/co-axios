@@ -1,4 +1,4 @@
-import type { IRequestConfig, UsePaginationOptions } from '../types';
+import { IRequestConfig, UsePaginationOptions, UsePaginationReturn } from '../types';
 import { useTableList } from './useTableList';
 import { getInstance } from './useInstance';
 import { unref } from 'vue-demi';
@@ -17,10 +17,10 @@ const getRequestBody = (config: IRequestConfig) => {
  * @param config
  * @param options
  */
-export const usePagination = <T = any, P extends object = any>(
+export const usePagination = <T = any, P extends object = any, D = any>(
   config: IRequestConfig<P>,
-  options?: UsePaginationOptions<P>
-) => {
+  options?: UsePaginationOptions<P, D>
+): UsePaginationReturn<T, P> => {
   const [requestBody, method] = getRequestBody(config);
   const instance = getInstance();
   const { $http } = instance;
@@ -44,6 +44,7 @@ export const usePagination = <T = any, P extends object = any>(
     handleSearch,
     handleCurrentChange,
     handleSizeChange,
+    isLastPage,
     handleReset
   } = useTableList<T, P>({
     request: {
@@ -68,6 +69,7 @@ export const usePagination = <T = any, P extends object = any>(
     tableData,
     tableTotal,
     abort,
+    isLastPage,
     handleCurrentChange,
     handleSizeChange,
     handleSearch,

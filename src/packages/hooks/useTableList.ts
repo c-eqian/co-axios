@@ -104,7 +104,7 @@ export const useTableList = <T = any, P extends object = any, D = any>(
     hasPage,
     append
   } = cloneConfig.response || {};
-  const tableData = ref<T[]>([]);
+  const tableData = ref<T[]>([]) as Ref<T[]>;
   const tableTotal = ref(0);
   const isExplicitly = ref(false);
   const tableLoading = ref(false);
@@ -150,6 +150,9 @@ export const useTableList = <T = any, P extends object = any, D = any>(
   const handleReset = () => {
     params.value = useCloneDeep(requestParams);
     isExplicitly.value = true;
+    if (append) {
+      tableData.value = [];
+    }
     return handleSearch();
   };
   /**

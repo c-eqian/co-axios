@@ -164,7 +164,7 @@ export type Watcher<P> = {
 /**
  * 参数观察
  */
-export type ParameterWatcher<P = any, D = any> = {
+export type UsePagination<P = any, D = any> = {
   /**
    * 分页键
    * @default pageNum
@@ -217,4 +217,48 @@ export type ParameterWatcher<P = any, D = any> = {
    */
   responseHandler?: (res: D) => any;
 };
-export type UsePaginationOptions<P = any, D = any> = ParameterWatcher<P, D> & Options;
+export type UsePaginationOptions<P = any, D = any> = UsePagination<P, D> & Options;
+/**
+ * 分页请求返回值
+ */
+export type UsePaginationReturn<T = any, P extends object = any> = {
+  /**
+   * 请求参数
+   */
+  params: Ref<P>;
+  /**
+   * 请求状态
+   */
+  tableLoading: Ref<boolean>;
+  /**
+   * 数据列表
+   */
+  tableData: Ref<T[]>;
+  /**
+   * 数据总数
+   */
+  tableTotal: Ref<number>;
+  /**
+   * 是否最后一页 依据返回数据是否小于页数,如果没传页数，永远为false
+   */
+  isLastPage: Ref<boolean>;
+  /**
+   * 当前分页改变
+   * @param pageNum
+   */
+  handleCurrentChange: (pageNum: number) => Promise<void>;
+  /**
+   * 页数改变
+   * @param pageSize
+   */
+  handleSizeChange: (pageSize: number) => Promise<void>;
+  /**
+   * 查询
+   * @param pageNum
+   */
+  handleSearch: (pageNum?: number) => Promise<void>;
+  /**
+   * 重置
+   */
+  handleReset: () => Promise<void>;
+} & Pick<RequestReturn, 'abort'>;
