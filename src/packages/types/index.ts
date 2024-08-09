@@ -148,29 +148,23 @@ export type Options = {
    */
   key?: string;
 };
-
+export type Watcher<P> = {
+  keys?: (keyof P)[];
+  /**
+   * watch 是否立即执行属性
+   * @default false
+   */
+  immediate?: boolean;
+  /**
+   * watch 深度监听属性
+   * @default false
+   */
+  deep?: boolean;
+};
 /**
  * 参数观察
  */
 export type ParameterWatcher<P = any, D = any> = {
-  watcher?: {
-    keys?: (keyof P)[];
-    /**
-     * watch 是否立即执行属性
-     * @default false
-     */
-    immediate?: boolean;
-    /**
-     * watch 深度监听属性
-     * @default false
-     */
-    deep?: boolean;
-  };
-  /**
-   * 请求前参数处理
-   * @param params
-   */
-  handleParams?: (params: P) => P;
   /**
    * 分页键
    * @default pageNum
@@ -181,6 +175,16 @@ export type ParameterWatcher<P = any, D = any> = {
    * @default pageSize
    */
   pageSizeKey?: string;
+  /**
+   * 接口请求前处理
+   */
+  handleParams?: (params: P) => P;
+  /**
+   * 观察
+   * 默认监听pageNumKey，pageSizeKe变化触发请求
+   * 如果传入空数组，不监听
+   */
+  watcher?: Watcher<P>;
   /**
    * 返回结果的数据列表键
    * @default list
@@ -198,6 +202,15 @@ export type ParameterWatcher<P = any, D = any> = {
    * ```
    */
   totalKey?: string;
+  /**
+   * 处理是还有数据
+   * @param res
+   */
+  hasPage?: (res: D) => boolean;
+  /**
+   * 是否追加，主要用于滚动分页
+   */
+  append?: boolean;
   /**
    * 自定义响应时处理，返回值必须包含listKey，totalKey，如果为空，应返回对应的默认值，即list、total
    * @param res
