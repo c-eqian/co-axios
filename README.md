@@ -164,7 +164,7 @@ const http = installHttp({
     /**
      * 使用自定义请求
      */
-    const http = window['axios-vue']['installHttp']({
+    const http = window['EqianAxiosVue']['installHttp']({
         baseURL: 'http://xxxxxx',
     })
     const { request } = http.get({
@@ -178,7 +178,7 @@ const http = installHttp({
      * 结合vue插件实例使用
      */
     const { createApp, watchEffect } = Vue
-    const { useGetFetch } = window['axios-vue']
+    const { useGetFetch } = window['EqianAxiosVue']
     createApp({
         setup(){
             const { data, request:_request } = useGetFetch({
@@ -190,7 +190,7 @@ const http = installHttp({
             })
             return {data}
         }
-    }).use(window['axios-vue'].default, {
+    }).use(window['EqianAxiosVue'].default, {
         baseURL: 'http://xxxxxx',
     }).mount('#app')
 </script>
