@@ -9,10 +9,12 @@ const handleEmpty = (config: IRequestConfig) => {
   if (config.method && config.method.toLocaleLowerCase() === 'post') {
     const { isFilterEmpty } = config as IRequestConfig;
     if (isBoolean(isFilterEmpty) && isFilterEmpty) {
-      return (config.data = removeEmptyValues(config.data ?? {}));
+      config.data = removeEmptyValues(config.data ?? {});
+      return config;
     }
     if (isArray(isFilterEmpty)) {
-      return (config.data = removeEmptyValues(config.data ?? {}, isFilterEmpty));
+      config.data = removeEmptyValues(config.data ?? {}, isFilterEmpty);
+      return config;
     }
   }
 

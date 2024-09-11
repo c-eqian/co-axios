@@ -9,6 +9,7 @@ export const handleRequestError = (err: Error | undefined) => {
 };
 export const handleResponseError = (error: AxiosError, axiosInstance: RequestHttp) => {
   const { config } = error;
+  if (!config) return Promise.reject(error);
   axiosInstance?.axiosCanceler?.removePending(config as IRequestConfig);
   if (axios.isCancel(error)) return; // 防止取消请求引起响应异常
   const { errorHandler } = config as IRequestConfig;

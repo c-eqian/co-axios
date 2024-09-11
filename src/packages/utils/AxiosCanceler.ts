@@ -2,6 +2,7 @@ import { IRequestConfig } from '../types';
 import { unref } from 'vue-demi';
 
 const getPendingUrl = (config: IRequestConfig): string => {
+  if (!config) return '&';
   return [config.method, config.url, unref(config.params), unref(config.data)].join('&');
 };
 

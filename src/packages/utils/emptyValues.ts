@@ -27,7 +27,7 @@ export const removeEmptyValues = <T extends object>(
         if (Object.keys(filteredObj).length > 0) {
           result[key] = filteredObj;
         }
-      } else if (filters.includes(value)) {
+      } else if (!filters.includes(value)) {
         // 如果是其他非空值，则保留
         result[key] = isString(value) ? value.trim() : value;
       }
