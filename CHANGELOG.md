@@ -1,6 +1,23 @@
 # 更新日志 
 
 
+### [1.0.1](https://github.com/c-eqian/co-axios/compare/v1.0.0...v1.0.1) (2024-09-11)
+
+
+###   Chores | 其他更新
+
+* release v1.0.0 ([e0d509f](https://github.com/c-eqian/co-axios/commit/e0d509fb1b6d62beff82872f42538282fa6a4002))
+
+
+### ⚡ Performance Improvements | 性能优化
+
+* **ALL:** 修改全局变量 ([127d7f9](https://github.com/c-eqian/co-axios/commit/127d7f98d41b3e5a7a2ce0ec4be2aecb75bd8a52))
+
+
+###   Bug Fixes | Bug 修复
+
+* 修复参数过滤导致返回空值 ([10d766b](https://github.com/c-eqian/co-axios/commit/10d766bad5ba61b4d8a2e7c197de101fcc63f5da))
+
 ## [1.0.0](https://github.com/c-eqian/co-axios/compare/v0.0.3...v1.0.0) (2024-08-09)
 
 
